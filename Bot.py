@@ -1,7 +1,7 @@
 import telebot
 import time
 
-bot = telebot.TeleBot("5953159365:AAHbB40ATCR-Zw6nMBKEphiam62l9ejIpIY")
+bot = telebot.TeleBot("5953159365:AAG5dKZk_4kNFDq0UzjrdvZhHYgp4xD1gO4")
 
 pics_value = 242
 
