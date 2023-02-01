@@ -17,7 +17,7 @@ def start(message):
 
         # задержка + переключение картинки
         steps += 1
-        time.sleep(2)
+        time.sleep(14400)
 
 
 @bot.message_handler(commands=['globalStop'])
