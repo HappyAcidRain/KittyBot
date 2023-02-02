@@ -8,9 +8,6 @@ from random import randint
 import telebot
 import time
 
-# для работы сервера
-print("200 OK")
-
 bot = telebot.TeleBot("5953159365:AAG5dKZk_4kNFDq0UzjrdvZhHYgp4xD1gO4")
 
 # количество зарегистрированных изображений
@@ -43,6 +40,8 @@ def stop(message):
 @bot.message_handler(commands=['statusCheck'])
 def check(message):
     bot.send_message(message.chat.id, f"Бот работает \n Изображений в базе: {pics_value}")
+    # для работы сервера
+    print("200 OK")
 
 
 # для постоянной работы
