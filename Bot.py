@@ -8,6 +8,9 @@ from random import randint
 import telebot
 import time
 
+# для работы сервера
+print("200 OK")
+
 bot = telebot.TeleBot("5953159365:AAG5dKZk_4kNFDq0UzjrdvZhHYgp4xD1gO4")
 
 # количество зарегистрированных изображений
