@@ -1,3 +1,8 @@
+# для постоянной работы
+import os, sys
+from requests.exceptions import ConnectionError, ReadTimeout
+
+from random import randint
 import telebot
 import time
 
@@ -8,7 +13,7 @@ pics_value = 242
 
 @bot.message_handler(commands=['startSending'])
 def start(message):
-    steps = 0
+    steps = randint(0, 242)
 
     while steps <= pics_value:
         # отправляем картинку
@@ -26,4 +31,11 @@ def stop(message):
     bot.stop_bot()
 
 
-bot.polling(none_stop=True)
+# для постоянной работы
+try:
+    bot.infinity_polling(timeout=10, long_polling_timeout=5)
+except (ConnectionError, ReadTimeout) as e:
+    sys.stdout.flush()
+    os.execv(sys.argv[0], sys.argv)
+else:
+    bot.infinity_polling(timeout=10, long_polling_timeout=5)
