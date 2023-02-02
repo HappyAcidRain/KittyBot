@@ -1,19 +1,23 @@
 # для постоянной работы
-import os, sys
+import os
+import sys
 from requests.exceptions import ConnectionError, ReadTimeout
 
+# для прочего
 from random import randint
 import telebot
 import time
 
 bot = telebot.TeleBot("5953159365:AAG5dKZk_4kNFDq0UzjrdvZhHYgp4xD1gO4")
 
-pics_value = 242
+# количество зарегистрированных изображений
+pics_value = 243
 
 
+# рассылка картинок (задержка: 4 часа)
 @bot.message_handler(commands=['startSending'])
 def start(message):
-    steps = randint(0, 242)
+    steps = randint(0, pics_value)
 
     while steps <= pics_value:
         # отправляем картинку
@@ -25,10 +29,18 @@ def start(message):
         time.sleep(14400)
 
 
+# полная остановка
 @bot.message_handler(commands=['globalStop'])
 def stop(message):
     bot.send_message(message.chat.id, "Бот остановлен!")
     bot.stop_bot()
+
+
+# проверка состояния
+@bot.message_handler(commands=['statusCheck'])
+def check(message):
+    bot.send_message(message.chat.id, "Бот работает")
+    bot.send_message(message.chat.id, f"Изображений в базе: {pics_value}")
 
 
 # для постоянной работы
