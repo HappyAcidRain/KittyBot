@@ -39,8 +39,7 @@ def stop(message):
 # проверка состояния
 @bot.message_handler(commands=['statusCheck'])
 def check(message):
-    bot.send_message(message.chat.id, "Бот работает")
-    bot.send_message(message.chat.id, f"Изображений в базе: {pics_value}")
+    bot.send_message(message.chat.id, f"Бот работает \n Изображений в базе: {pics_value}")
 
 
 # для постоянной работы
