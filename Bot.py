@@ -7,11 +7,29 @@ from requests.exceptions import ConnectionError, ReadTimeout
 from random import randint
 import telebot
 import time
+import datetime
 
 bot = telebot.TeleBot("5953159365:AAG5dKZk_4kNFDq0UzjrdvZhHYgp4xD1gO4")
 
 # количество зарегистрированных изображений
-pics_value = 243
+pics_value = 244
+
+
+# актуальное время
+def curTime():
+    current_date = datetime.datetime.now()
+
+    # Retrieving each component of the date
+    # i.e year,month,day,hour,minute,second and
+    # Multiplying with multiples of 100
+    # year - 10000000000
+    # month - 100000000
+    # day - 1000000
+    # hour - 10000
+    # minute - 100
+
+    current_time = current_date.hour * 100 + current_date.minute
+    return current_time
 
 
 # рассылка картинок (задержка: 4 часа)
@@ -20,12 +38,20 @@ def start(message):
     steps = randint(0, pics_value)
 
     while steps <= pics_value:
-        # отправляем картинку
-        cat_photo = open(f"ParserPics/images{steps}.jpg", 'rb')
-        bot.send_photo(message.chat.id, cat_photo)
+        current_time = curTime()
+
+        # c 8:00              до 23:00
+        if 800 < current_time < 2300:
+            # отправляем картинку
+            cat_photo = open(f"ParserPics/images{steps}.jpg", 'rb')
+            bot.send_photo(message.chat.id, cat_photo)
+
+        else:
+            # спатки
+            pass
 
         # задержка + переключение картинки
-        steps += 1
+        steps = randint(0, pics_value)
         time.sleep(14400)
 
 
@@ -40,8 +66,6 @@ def stop(message):
 @bot.message_handler(commands=['statusCheck'])
 def check(message):
     bot.send_message(message.chat.id, f"Бот работает \n Изображений в базе: {pics_value}")
-    # для работы сервера
-    print("200 OK")
 
 
 # для постоянной работы
